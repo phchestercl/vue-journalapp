@@ -116,5 +116,10 @@ Adicionalmente ponemos el store en el punto mas alto de la aplicacion en el arch
 
 
 ## Entradas ficticias y punto de restauración
-  
-  
+
+Creamos un realese tag
+~~~
+git tag -a v1.0.0 -m "Vuex configurado - Journal"
+~~~
+
+## mapGetters getEntriesByTerm

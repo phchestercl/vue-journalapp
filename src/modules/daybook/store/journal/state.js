@@ -2,21 +2,21 @@ export default()=>({
     isLoading:true,
     entries:[
         {
-            id:new Date().getTime(),
+            id:'124515',
             date:new Date().toDateString(),
-            text:'lElit non cupidatat id cupidatat ex cillum. Tempor Lorem nulla consectetur aliquip et Lorem sit. Non mollit aute reprehenderit Lorem adipisicing dolor fugiat sit nisi consequat proident voluptate non labore. Eiusmod occaecat adipisicing duis voluptate cupidatat in cupidatat voluptate. Consequat amet sunt deserunt anim amet nulla deserunt esse. Labore mollit enim mollit incididunt cillum ea ex ad.',
+            text:'Uno lElit philip hola este es el primer texto Elit est voluptate excepteur irure et labore nisi aute nisi mollit nisi ad exercitation. Commodo ullamco magna nostrud sunt do aliquip officia nisi non ea dolore. Nulla deserunt incididunt incididunt ea aute elit irure. Ea adipisicing tempor reprehenderit laboris aliquip exercitation anim officia esse irure nulla laboris aliqua cillum. Consequat culpa nisi non dolor qui pariatur enim.',
             picture:null
         },
         {
-            id:new Date().getTime()+1000,
+            id:'134515',
             date:new Date().toDateString(),
-            text:'Incididunt aliqua est velit elit sunt minim et dolor aliqua amet ea. Laboris ea mollit adipisicing amet ad ad. Ea fugiat ad ipsum sunt esse. Adipisicing pariatur fugiat irure anim voluptate ipsum cillum dolor mollit.',
+            text:'Dos Incididunt philip chester este es el segundo texto lo mas probable es que sea de menos de 130 caracteres',
             picture:null
         },
         {
-            id:new Date().getTime()+2000,
+            id:'144515',
             date:new Date().toDateString(),
-            text:'Irure do pariatur eu fugiat. Commodo exercitation do nulla mollit id aliqua et proident sit. Labore tempor cillum in velit quis. Cupidatat enim enim mollit dolore amet ad.',
+            text:'Tres Irure do pariatur chester eu fugiat. este es el texto 3.Deserunt irure anim ex aute velit duis nulla. Do dolor ea est deserunt anim ut excepteur laborum dolore qui. Sit qui esse ea minim Lorem laborum. Magna consequat exercitation cupidatat sit eu.',
             picture:null
         }
 ]
