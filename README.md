@@ -123,3 +123,22 @@ git tag -a v1.0.0 -m "Vuex configurado - Journal"
 ~~~
 
 ## mapGetters getEntriesByTerm
+
+
+# Seccion 12
+## peticion al backend
+creamos creamos la carpeta api en el src y alli configuramos la instancia de axios.
+Luego en actions del store del juornal hacemos la peticion, en nuetro caso, hacemos la petición a **loadEntries**
+por último en nuestra vista **EntryView**, accedemos a nuestra action mediante mapActions y llamammos a la función al momento de crear el objeto
+
+## Primera mutacion
+~~~
+export const setEntries =  (state, entries)=>{
+    state.entries=[...state.entries, ...entries]
+    state.isLoading=false
+
+}
+~~~
+## transición carga
+
+## FAB Emitir acción

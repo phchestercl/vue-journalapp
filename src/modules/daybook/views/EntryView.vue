@@ -24,7 +24,9 @@
     </div>
   </template>
 
-  <Fab icon="fa-save" />
+  <Fab  icon="fa-save" 
+        @on:click="saveEntry"
+        />
   <img
     src="https://www.autobild.es/sites/autobild.es/public/styles/855/public/dc/fotos/Volvo_S60_03.jpg?itok=1zT-Ffz-"
     alt="Volvo"
@@ -58,12 +60,16 @@ export default {
   },
   methods: {
     loadEntry() {
-      const entry = this.getEntryById(this.id);
-      if (!entry) return this.$router.push({ name: "no-entry" });
-      this.entry = entry;
-      this.fecha = getDayMonthYear(entry.date);
+      const entry = this.getEntryById(this.id)
+      if (!entry) return this.$router.push({ name: "no-entry" })
+      this.entry = entry
+      this.fecha = getDayMonthYear(entry.date)
     },
+    async saveEntry(){
+        console.log('Guardando Entrada')
+     }
   },
+
   watch: {
     id() {
       this.loadEntry();
