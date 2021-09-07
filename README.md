@@ -142,3 +142,26 @@ export const setEntries =  (state, entries)=>{
 ## transición carga
 
 ## FAB Emitir acción
+archivos **EntryVue** y **Fab**
+
+## Actualizar un registro CRUD
+
+
+## Perparacion para la creaciíon de nuevos registros
+
+## Borrar un registro
+
+## Mensajes de confirmación y espera
+
+Utilizaremos 
+SweetAlert2
+para mostrar los mensajes de confirmación y espera
+
+~~~
+npm install sweetalert2
+~~~
+Básicamente las alrtas las necesitamos en componente **EntryView.vue**, por lo tanto ahí es dónde importaremos el paquete.
+
+~~~
+import Swal from 'sweetalert2'
+~~~

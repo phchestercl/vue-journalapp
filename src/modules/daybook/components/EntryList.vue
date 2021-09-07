@@ -8,6 +8,12 @@
       v-model="term"
       />
     </div>
+    <div class="mt-2 d-flex flex-column">
+      <button @click="goToNewEntry" class="btn btn-primary mx-3">
+        <i class="fa fa-plus-circle"></i>
+        Nueva Entrada
+      </button>
+    </div>
     <div class="entry-scrollarea">
       <Entry 
         v-for="entry in entriesByTerm"
@@ -38,6 +44,11 @@ export default {
   data(){
     return{
       term:''
+    }
+  },
+  methods:{
+    goToNewEntry(){
+      this.$router.push({name:'entry',params:{id:'new'}})
     }
   }
 }

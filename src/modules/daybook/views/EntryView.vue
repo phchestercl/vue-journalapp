@@ -8,7 +8,7 @@
         <span class="mx-2 fs-4 fw-light">{{ fecha.yearDay }}</span>
       </div>
       <div>
-        <button class="btn btn-danger mx-2">
+        <button v-if="entry.id" @click="delEntry" class="btn btn-danger mx-2">
           Borrar
           <i class="fa fa-trash-alt"></i>
         </button>
@@ -24,9 +24,7 @@
     </div>
   </template>
 
-  <Fab  icon="fa-save" 
-        @on:click="saveEntry"
-        />
+  <Fab icon="fa-save" @on:click="saveEntry" />
   <img
     src="https://www.autobild.es/sites/autobild.es/public/styles/855/public/dc/fotos/Volvo_S60_03.jpg?itok=1zT-Ffz-"
     alt="Volvo"
@@ -37,8 +35,10 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import getDayMonthYear from "../helpers/getDayMonthYear";
+import Swal from "sweetalert2";
+
 export default {
   props: {
     id: { type: String, required: true },
@@ -60,16 +60,81 @@ export default {
   },
   methods: {
     loadEntry() {
-      const entry = this.getEntryById(this.id)
-      if (!entry) return this.$router.push({ name: "no-entry" })
-      this.entry = entry
-      this.fecha = getDayMonthYear(entry.date)
+      let entry;
+      if (this.id === "new") {
+        //const newDate =new Date().toISOString()
+        entry = {
+          text: "",
+          date: new Date().toISOString(),
+        };
+      } else {
+        entry = this.getEntryById(this.id);
+        if (!entry) return this.$router.push({ name: "no-entry" });
+      }
+      this.entry = entry;
+      this.fecha = getDayMonthYear(entry.date);
     },
-    async saveEntry(){
-        console.log('Guardando Entrada')
-     }
+    ...mapActions("journal", ["upDateEntry", "createEntry", "deleteEntry"]),
+    async saveEntry() {
+      // SweetAlert
+      new Swal({
+        title: "Espere por Favor",
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
+      if (this.id !== "new") {
+        const data = { id: this.id, text: this.entry.text };
+        await this.upDateEntry(data);
+        this.$router.push({ name: "no-entry" });
+      } else {
+        const data = {
+          idBss: "612bc7a41521cf8ab020079d",
+          idBbr: "612bc7a41521cf8ab020079f",
+          idWst: "612bc7a41521cf8ab02007a1",
+          idcnt: "612c291009320794b9c1485d",
+          idato: this.entry.text,
+          ornam: this.entry.text,
+          stor: 1,
+        };
+        await this.createEntry(data);
+        this.$router.push({ name: "no-entry" });
+      }
+      Swal.fire("Guardado", "Entrada Registrada", "success");
+    },
+    async delEntry() {
+      /* Swal.fire({
+        title: "Esta Seguro de Eliminar la Orden de Trabajo?",
+        text: "No podrá revertir el borrado",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, Borralo!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.deleteEntry(this.id);
+          Swal.fire("Borrado!", "La Orden de Trabajo fue Borrada.", "success");
+          this.$router.push({ name: "no-entry" });
+        }
+      }); */
+      const resul = await Swal.fire({
+        title:'¿Está seguro de borrar la Orden de Trabajo?',
+        text:'Una vez borrda, no se podrá recuperar.',
+        showDenyButton:true,
+        confirmButtonText:'Si, estoy seguro'
+      })
+      if(!resul.isConfirmed) return
+      new Swal({
+        title:'Espere por favor ...',
+        allowOutsideClick:false
+      })
+      Swal.showLoading()
+      await this.deleteEntry(this.id);
+      Swal.fire("Borrado!", "La Orden de Trabajo fue Borrada.", "success");
+      this.$router.push({ name: "no-entry" });
+      
+    },
   },
-
   watch: {
     id() {
       this.loadEntry();
