@@ -8,11 +8,20 @@
         <span class="mx-2 fs-4 fw-light">{{ fecha.yearDay }}</span>
       </div>
       <div>
+        
+        <input 
+          type="file" 
+          @change="onSelectedImage"
+          ref="imageSelector"
+          accept="image/*"
+          v-show="false"
+          >
         <button v-if="entry.id" @click="delEntry" class="btn btn-danger mx-2">
           Borrar
           <i class="fa fa-trash-alt"></i>
         </button>
-        <button class="btn btn-primary">
+        <button @click="onSelectImage"  
+                class="btn btn-primary">
           Subir Foto
           <i class="fa fa-upload"></i>
         </button>
@@ -25,9 +34,21 @@
   </template>
 
   <Fab icon="fa-save" @on:click="saveEntry" />
-  <img
+  <!-- <img
     src="https://www.autobild.es/sites/autobild.es/public/styles/855/public/dc/fotos/Volvo_S60_03.jpg?itok=1zT-Ffz-"
     alt="Volvo"
+    class="img-thumbnail"
+  /> -->
+  <img
+    v-if="localImage"
+    :src="localImage"
+    alt="entry-picture"
+    class="img-thumbnail"
+  />
+  <img
+    v-if="imgFile && !localImage"
+    :src="imgFile"
+    alt="entry-picture"
     class="img-thumbnail"
   />
 </template>
@@ -36,9 +57,9 @@
 <script>
 import { defineAsyncComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
-import getDayMonthYear from "../helpers/getDayMonthYear";
 import Swal from "sweetalert2";
-
+import getDayMonthYear from "../helpers/getDayMonthYear";
+import uploadImage from '../helpers/uploadImage'
 export default {
   props: {
     id: { type: String, required: true },
@@ -50,6 +71,8 @@ export default {
     return {
       entry: null,
       fecha: null,
+      localImage:null,
+      imgFile:null
     };
   },
   created() {
@@ -73,6 +96,7 @@ export default {
       }
       this.entry = entry;
       this.fecha = getDayMonthYear(entry.date);
+      this.imgFile= entry.titulo
     },
     ...mapActions("journal", ["upDateEntry", "createEntry", "deleteEntry"]),
     async saveEntry() {
@@ -82,8 +106,10 @@ export default {
         allowOutsideClick: false,
       });
       Swal.showLoading();
+      const picture= await uploadImage(this.imgFile)
+      console.picture
       if (this.id !== "new") {
-        const data = { id: this.id, text: this.entry.text };
+        const data = { id: this.id, text: this.entry.text,idato:picture };
         await this.upDateEntry(data);
         this.$router.push({ name: "no-entry" });
       } else {
@@ -92,7 +118,7 @@ export default {
           idBbr: "612bc7a41521cf8ab020079f",
           idWst: "612bc7a41521cf8ab02007a1",
           idcnt: "612c291009320794b9c1485d",
-          idato: this.entry.text,
+          idato: picture,
           ornam: this.entry.text,
           stor: 1,
         };
@@ -134,6 +160,25 @@ export default {
       this.$router.push({ name: "no-entry" });
       
     },
+    onSelectedImage(event){
+      const file =event.target.files[0]
+      if(!file) {
+        this.localImage=null
+        this.imgFile=null
+        return
+      }
+      // si tenemos el archivo lo procesaremos
+      this.imgFile=file
+      const fr = new FileReader()
+      fr.onload = ()=>this.localImage = fr.result
+      fr.readAsDataURL(file)
+    },
+    onSelectImage(){
+      //crea una referencia local al input file el que va a estar oculto
+      // con this.$refs tenemos acceso a las referencias
+      //console.log(this.$refs)
+      this.$refs.imageSelector.click()
+    }
   },
   watch: {
     id() {

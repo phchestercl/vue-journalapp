@@ -165,3 +165,7 @@ Básicamente las alrtas las necesitamos en componente **EntryView.vue**, por lo 
 ~~~
 import Swal from 'sweetalert2'
 ~~~
+
+## Seleccionar u mostrar una imagen local
+
+## Referencias locales

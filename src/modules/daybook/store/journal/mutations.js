@@ -14,6 +14,7 @@ export const upDateEntry =  (state,data)=>{
     const index = state.entries.findIndex(entries=>entries.id=== data.id)
     //console.log(index)
     state.entries[index].text=data.text
+    state.entries[index].titulo=data.idato
 }
 export const addEntry =  (state,data)=>{
         //console.log('Entro en addEntryMutatio')

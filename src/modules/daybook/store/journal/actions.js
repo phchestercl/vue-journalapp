@@ -25,9 +25,9 @@ export const loadEntries = async ({ commit })=>{
 
 export const upDateEntry = async ({ commit },data)=>{
     
-    const {id,text}=data
+    const {id,text,idato}=data
     try {
-        await journalApi.put(`/wrko/${id}`,{text})
+        await journalApi.put(`/wrko/${id}`,{text,idato})
         //console.log(res)
         commit('upDateEntry',data)
         
