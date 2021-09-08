@@ -169,3 +169,35 @@ import Swal from 'sweetalert2'
 ## Seleccionar u mostrar una imagen local
 
 ## Referencias locales
+
+# Seccion 13 Test
+
+Tendremos que instalar el unit-jest test, la documentación la podemos ver [aqui](https://cli.vuejs.org/core-plugins/unit-jest.html#configuration)
+
+~~~
+vue add unit-jest
+~~~
+
+Se tiene que crear la misma estructura de carpetas del src en el directorio /test/unit
+
+~~~
+import { shallowMount } from '@vue/test-utils'
+import About from '../../../src/views/About.vue'
+
+describe('/src/views/About', () => {
+  test('Snapshot Abuot', () => {
+    
+    const wrapper = shallowMount(About)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+})
+~~~
+
+La primera imprtación es el shallowMount que nos permite montar solo el componenete, no los componentes hijos, para utilizar los componentes hijos se utiliza el **mount**.
+
+La segunda importación es el componente que se desea probar.
+
+## Primeras pruebas en el router
+**Home.spec.js**ç
+## Pruebas Fab Component
+Prueba de emision
