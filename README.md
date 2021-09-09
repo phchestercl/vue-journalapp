@@ -214,3 +214,7 @@ pruebas en test/units/modules/daybook/router/index.spec.js
 configuyrtacion del store
 
 ## Mutations setEntries
+
+## Actions Test
+
+## Pruebas el Componente Entry
