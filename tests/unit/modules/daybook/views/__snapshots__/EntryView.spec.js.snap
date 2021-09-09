@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntryList componnet Debe mostrar la entrada correctamente 1`] = `
+<div class="entry-title d-flex justify-content-between p-2">
+  <div><span class="text-success fs-3 fw-bold">7</span><span class="mx-1 fs-3">Septiembre</span><span class="mx-2 fs-4 fw-light">2021, Martes</span></div>
+  <div><input type="file" accept="image/*" style="display: none;"><button class="btn btn-danger mx-2"> Borrar <i class="fa fa-trash-alt"></i></button><button class="btn btn-primary"> Subir Foto <i class="fa fa-upload"></i></button></div>
+</div>
+<hr>
+<div class="d-flex flex-column px-3 h-75"><textarea placeholder="Que sucedio hoy"></textarea></div>
+<fab-stub icon="fa-save"></fab-stub>
+<!-- <img
+    src="https://www.autobild.es/sites/autobild.es/public/styles/855/public/dc/fotos/Volvo_S60_03.jpg?itok=1zT-Ffz-"
+    alt="Volvo"
+    class="img-thumbnail"
+  /> -->
+<!--v-if--><img src="https://res.cloudinary.com/philipcl/image/upload/v1631065477/cursovue/9-logo_wzsown.png" alt="entry-picture" class="img-thumbnail">
+`;
+
+exports[`EntryList componnet debe sacar al usuario por que al id no existe 1`] = `
+<!--v-if-->
+<fab-stub icon="fa-save"></fab-stub>
+<!-- <img
+    src="https://www.autobild.es/sites/autobild.es/public/styles/855/public/dc/fotos/Volvo_S60_03.jpg?itok=1zT-Ffz-"
+    alt="Volvo"
+    class="img-thumbnail"
+  /> -->
+<!--v-if-->
+<!--v-if-->
+`;

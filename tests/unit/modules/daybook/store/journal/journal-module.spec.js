@@ -123,5 +123,6 @@ describe('Vuex - Pruebas en Journal Module', () => {
         const store =createVuexStore({ isLoading: true, entries: [] })
         await store.dispatch('journal/loadEntries')
         //selecionamos la primera entrada 
+        
     })
 })

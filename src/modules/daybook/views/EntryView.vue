@@ -1,5 +1,5 @@
 <template>
-  <!-- <h1>Hola Mundo es una nueva entrada</h1> -->
+  
   <template v-if="entry">
     <div class="entry-title d-flex justify-content-between p-2">
       <div>
@@ -8,20 +8,18 @@
         <span class="mx-2 fs-4 fw-light">{{ fecha.yearDay }}</span>
       </div>
       <div>
-        
-        <input 
-          type="file" 
+        <input
+          type="file"
           @change="onSelectedImage"
           ref="imageSelector"
           accept="image/*"
           v-show="false"
-          >
+        />
         <button v-if="entry.id" @click="delEntry" class="btn btn-danger mx-2">
           Borrar
           <i class="fa fa-trash-alt"></i>
         </button>
-        <button @click="onSelectImage"  
-                class="btn btn-primary">
+        <button @click="onSelectImage" class="btn btn-primary">
           Subir Foto
           <i class="fa fa-upload"></i>
         </button>
@@ -59,9 +57,9 @@ import { defineAsyncComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
 import Swal from "sweetalert2";
 import getDayMonthYear from "../helpers/getDayMonthYear";
-import uploadImage from '../helpers/uploadImage'
+import uploadImage from "../helpers/uploadImage";
 export default {
-  name:'EntryView',
+  name: "EntryView",
   props: {
     id: { type: String, required: true },
   },
@@ -72,8 +70,8 @@ export default {
     return {
       entry: null,
       fecha: null,
-      localImage:null,
-      imgFile:null
+      localImage: null,
+      imgFile: null,
     };
   },
   created() {
@@ -97,7 +95,7 @@ export default {
       }
       this.entry = entry;
       this.fecha = getDayMonthYear(entry.date);
-      this.imgFile= entry.titulo
+      this.imgFile = entry.titulo;
     },
     ...mapActions("journal", ["upDateEntry", "createEntry", "deleteEntry"]),
     async saveEntry() {
@@ -107,10 +105,10 @@ export default {
         allowOutsideClick: false,
       });
       Swal.showLoading();
-      const picture= await uploadImage(this.imgFile)
-      console.picture
+      const picture = await uploadImage(this.imgFile);
+      console.picture;
       if (this.id !== "new") {
-        const data = { id: this.id, text: this.entry.text,idato:picture };
+        const data = { id: this.id, text: this.entry.text, idato: picture };
         await this.upDateEntry(data);
         this.$router.push({ name: "no-entry" });
       } else {
@@ -145,41 +143,40 @@ export default {
         }
       }); */
       const resul = await Swal.fire({
-        title:'¿Está seguro de borrar la Orden de Trabajo?',
-        text:'Una vez borrda, no se podrá recuperar.',
-        showDenyButton:true,
-        confirmButtonText:'Si, estoy seguro'
-      })
-      if(!resul.isConfirmed) return
-      new Swal({
-        title:'Espere por favor ...',
-        allowOutsideClick:false
-      })
-      Swal.showLoading()
+        title: "¿Está seguro de borrar la Orden de Trabajo?",
+        text: "Una vez borrda, no se podrá recuperar.",
+        showDenyButton: true,
+        confirmButtonText: "Si, estoy seguro",
+      });
+      if (!resul.isConfirmed) return;
+      Swal.fire({
+        title: "Espere por favor ...",
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
       await this.deleteEntry(this.id);
-      Swal.fire("Borrado!", "La Orden de Trabajo fue Borrada.", "success");
       this.$router.push({ name: "no-entry" });
-      
+      Swal.fire("Borrado!", "La Orden de Trabajo fue Borrada.", "success");
     },
-    onSelectedImage(event){
-      const file =event.target.files[0]
-      if(!file) {
-        this.localImage=null
-        this.imgFile=null
-        return
+    onSelectedImage(event) {
+      const file = event.target.files[0];
+      if (!file) {
+        this.localImage = null;
+        this.imgFile = null;
+        return;
       }
       // si tenemos el archivo lo procesaremos
-      this.imgFile=file
-      const fr = new FileReader()
-      fr.onload = ()=>this.localImage = fr.result
-      fr.readAsDataURL(file)
+      this.imgFile = file;
+      const fr = new FileReader();
+      fr.onload = () => (this.localImage = fr.result);
+      fr.readAsDataURL(file);
     },
-    onSelectImage(){
+    onSelectImage() {
       //crea una referencia local al input file el que va a estar oculto
       // con this.$refs tenemos acceso a las referencias
       //console.log(this.$refs)
-      this.$refs.imageSelector.click()
-    }
+      this.$refs.imageSelector.click();
+    },
   },
   watch: {
     id() {
