@@ -8,7 +8,7 @@ const uploadImage = async (file)=>{
         formData.append('file',file)
         const url =`https://api.cloudinary.com/v1_1/philipcl/image/upload`
         const {data} = await axios.post(url,formData)
-        console.log(data.secure_url)
+        //console.log(data.secure_url)
         return data.secure_url
 
     } catch (error) {

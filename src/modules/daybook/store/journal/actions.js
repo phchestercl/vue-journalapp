@@ -29,7 +29,7 @@ export const upDateEntry = async ({ commit },data)=>{
     try {
         await journalApi.put(`/wrko/${id}`,{text,idato})
         //console.log(res)
-        commit('upDateEntry',data)
+        commit('upDateEntry',{...data})
         
     } catch (error) {
         console.log(error)       

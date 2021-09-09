@@ -201,3 +201,16 @@ La segunda importación es el componente que se desea probar.
 **Home.spec.js**ç
 ## Pruebas Fab Component
 Prueba de emision
+## Pruebas en el DayBook Router
+pruebas en test/units/modules/daybook/router/index.spec.js
+1 comprabamos que el objeto esté igual
+2 Comprobar que la rutas carguen
+3 probar funcion de mapeo de ruta
+
+## Pruebas de cargas de archivos
+
+
+## Pruebas del Store
+configuyrtacion del store
+
+## Mutations setEntries
